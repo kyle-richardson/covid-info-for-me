@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
+import StateInfo from "./StateInfo";
 
 const CountyInfo = () => {
   const [countyList, setCountyList] = useState([]);
@@ -44,6 +45,7 @@ const CountyInfo = () => {
       </div>
 
       {myCountyObject && <pre>{JSON.stringify(myCountyObject, null, 2)}</pre>}
+      {myCountyObject && <StateInfo stateName={myCountyObject.state_name} />}
     </div>
   );
 };
