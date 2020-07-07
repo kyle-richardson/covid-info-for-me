@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import moment from "moment";
-import { countryAbbrev } from "../data/countryAbbrev";
+import { stateAbbrev } from "../data/stateAbbrev";
 
 const StateInfo = ({ stateName }) => {
   const [stateList, setStateList] = useState([]);
@@ -11,7 +11,7 @@ const StateInfo = ({ stateName }) => {
   );
   const [searchObject, setSearchObject] = useState("");
   const abbrev = stateName
-    ? countryAbbrev.filter(
+    ? stateAbbrev.filter(
         (state) => state.name.toLowerCase() === stateName.toLowerCase()
       )[0].abbreviation
     : "TX";
