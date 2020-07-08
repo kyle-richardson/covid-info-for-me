@@ -88,7 +88,16 @@ const CountyInfo = () => {
         <Button type="submit">Search</Button>
       </form>
       {myCountyObject && <h3>{`County: ${myCountyString}`}</h3>}
-      {myCountyObject && <pre>{JSON.stringify(myCountyObject, null, 2)}</pre>}
+      {myCountyObject && (
+        <div>
+          <p>Confirmed(total): {myCountyObject[0].confirmed}</p>
+          <p>New cases: {myCountyObject[0].new}</p>
+          <p>Deaths(total): {myCountyObject[0].death}</p>
+          <p>New deaths: {myCountyObject[0].new_death}</p>
+          <p>Fatality rate: {myCountyObject[0].fatality_rate}</p>
+          <p>Last Updated: {myCountyObject[0].last_update}</p>
+        </div>
+      )}
       {myCountyObject && (
         <StateInfo
           stateName={myStateString}

@@ -25,6 +25,7 @@ const StateInfo = ({ stateName, setErrors, errors }) => {
         stateAbbr: abbrev,
       })
       .then((res) => {
+        console.log(res.data.message);
         setStateList(res.data.message);
         setErrors({ ...errors, state: "" });
       })
@@ -42,7 +43,13 @@ const StateInfo = ({ stateName, setErrors, errors }) => {
   return (
     <div className="county-info-container">
       {searchObject && <h3>{`State: ${stateName} (${abbrev})`}</h3>}
-      {searchObject && <pre>{JSON.stringify(searchObject, null, 2)}</pre>}
+      {searchObject && (
+        <div>
+          <p>Confirmed(total): {searchObject[0].Confirmed}</p>
+          <p>Deaths(total): {searchObject[0].Deaths}</p>
+          <p>As of: {searchObject[0].Date}</p>
+        </div>
+      )}
     </div>
   );
 };
