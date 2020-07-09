@@ -36,18 +36,36 @@ const StateInfo = ({ stateName, setErrors, errors }) => {
 
   useEffect(() => {
     if (searchDate && stateList.length > 0) {
-      setSearchObject(stateList.filter((ele) => ele.Date === searchDate));
-    }
+      const filterForDate = stateList.filter((ele) => ele.Date === searchDate);
+      const backOneDay = stateList.filter(
+        (ele) =>
+          ele.Date ===
+          moment(searchDate).subtract(1, "days").format("YYYY-MM-DD")
+      );
+      setSearchObject({
+        ...filterForDate[0],
+        new_confirmed:
+          Number(filterForDate[0].Confirmed) - Number(backOneDay[0].Confirmed),
+        new_deaths:
+          Number(filterForDate[0].Deaths) - Number(backOneDay[0].Deaths),
+      });
+    } else setSearchObject("");
   }, [searchDate, stateList]);
 
   return (
-    <div className="county-info-container">
-      {searchObject && <h3>{`State: ${stateName} (${abbrev})`}</h3>}
+    <div className="state-info-container">
       {searchObject && (
-        <div>
-          <p>Confirmed(total): {searchObject[0].Confirmed}</p>
-          <p>Deaths(total): {searchObject[0].Deaths}</p>
-          <p>As of: {searchObject[0].Date}</p>
+        <h3>{`State: ${
+          stateName.charAt(0).toUpperCase() + stateName.slice(1)
+        } (${abbrev})`}</h3>
+      )}
+      {searchObject && (
+        <div style={{ textAlign: "left" }}>
+          <p>Confirmed(total): {searchObject.Confirmed}</p>
+          <p>New cases(24 hrs): {searchObject.new_confirmed}</p>
+          <p>Deaths(total): {searchObject.Deaths}</p>
+          <p>New deaths(24 hrs): {searchObject.new_deaths}</p>
+          <p>As of: {searchObject.Date}</p>
         </div>
       )}
     </div>

@@ -50,11 +50,13 @@ const CountyInfo = () => {
           ...errors,
           county: "",
         });
-      } else
+      } else {
         setErrors({
           ...errors,
           county: "Could not find a county by that name in selected state.",
         });
+        setMyCountyObject("");
+      }
     }
   }, [myCountyString, countyList, myStateString]);
 
@@ -87,13 +89,27 @@ const CountyInfo = () => {
         />
         <Button type="submit">Search</Button>
       </form>
-      {myCountyObject && <h3>{`County: ${myCountyString}`}</h3>}
       {myCountyObject && (
-        <div>
+        <h3>{`County: ${
+          myCountyString.charAt(0).toUpperCase() + myCountyString.slice(1)
+        }`}</h3>
+      )}
+      {myCountyObject && (
+        <div style={{ textAlign: "left" }}>
           <p>Confirmed(total): {myCountyObject[0].confirmed}</p>
-          <p>New cases: {myCountyObject[0].new}</p>
+          <p>
+            New cases(24 hrs):{" "}
+            {myCountyObject[0].new === 0
+              ? "0 (or not recorded)"
+              : myCountyObject[0].new}
+          </p>
           <p>Deaths(total): {myCountyObject[0].death}</p>
-          <p>New deaths: {myCountyObject[0].new_death}</p>
+          <p>
+            New deaths(24 hrs):{" "}
+            {myCountyObject[0].new_death === 0
+              ? "0 (or not recorded)"
+              : myCountyObject[0].new_death}
+          </p>
           <p>Fatality rate: {myCountyObject[0].fatality_rate}</p>
           <p>Last Updated: {myCountyObject[0].last_update}</p>
         </div>
