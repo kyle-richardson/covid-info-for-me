@@ -4,6 +4,7 @@ import axios from "axios";
 import CountyInfo from "./components/CountyInfo";
 import LocationForm from "./components/LocationForm";
 import StateInfo from "./components/StateInfo";
+import { Spinner } from "evergreen-ui";
 
 function App() {
   const [currentState, setCurrentState] = useState("");
@@ -13,8 +14,10 @@ function App() {
   const [countyErrors, setCountyErrors] = useState();
   const [stateErrors, setStateErrors] = useState();
   const [myCountyObject, setMyCountyObject] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
+    setIsFetching(true);
     axios
       .get(`${process.env.REACT_APP_API_BASE_URL}/county`)
       .then((res) => {
@@ -23,6 +26,9 @@ function App() {
       })
       .catch((err) => {
         setCountyErrors("Could not fetch county data. Try again later.");
+      })
+      .finally((res) => {
+        setIsFetching(false);
       });
   }, []);
 
@@ -34,6 +40,7 @@ function App() {
       );
       if (getCounties.length > 0) {
         setStateCountyList(getCounties);
+        setCurrentCounty("");
       }
     }
   }, [currentState]);
@@ -52,17 +59,24 @@ function App() {
 
   return (
     <div className="App">
-      <h1>COVID info for me</h1>
-      {stateErrors && <p style={{ color: "red" }}>{stateErrors}</p>}
-      {countyErrors && <p style={{ color: "red" }}>{countyErrors}</p>}
-      <LocationForm
-        currentState={currentState}
-        setState={setCurrentState}
-        countyList={stateCountyList}
-        setCounty={setCurrentCounty}
-      />
-      <StateInfo currentState={currentState} />
-      <CountyInfo myCountyObject={myCountyObject} />
+      {isFetching ? (
+        <Spinner marginX="auto" marginY={"20%"} />
+      ) : (
+        <>
+          <h1>COVID info for me</h1>
+          {stateErrors && <p style={{ color: "red" }}>{stateErrors}</p>}
+          {countyErrors && <p style={{ color: "red" }}>{countyErrors}</p>}
+          <LocationForm
+            currentState={currentState}
+            setState={setCurrentState}
+            countyList={stateCountyList}
+            setCounty={setCurrentCounty}
+            currentCounty={currentCounty}
+          />
+          <StateInfo currentState={currentState} />
+          <CountyInfo myCountyObject={myCountyObject} />
+        </>
+      )}
     </div>
   );
 }

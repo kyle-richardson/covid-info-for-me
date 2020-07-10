@@ -2,7 +2,13 @@ import React from "react";
 import { Combobox } from "evergreen-ui";
 import { stateAbbrev } from "../data/stateAbbrev";
 
-const LocationForm = ({ currentState, setState, countyList, setCounty }) => {
+const LocationForm = ({
+  currentState,
+  setState,
+  countyList,
+  setCounty,
+  currentCounty,
+}) => {
   const stateListFormatted = stateAbbrev.map(
     (ele) => `${ele.name} (${ele.abbreviation})`
   );
@@ -15,18 +21,18 @@ const LocationForm = ({ currentState, setState, countyList, setCounty }) => {
         style={{ marginBottom: "10px" }}
         items={stateListFormatted}
         onChange={(selected) => setState(selected)}
+        selectedItem={currentState}
         placeholder="State"
         autocompleteProps={{
-          // Used for the title in the autocomplete.
           title: "State",
         }}
       />
       <Combobox
         items={countyListFormatted}
         onChange={(selected) => setCounty(selected)}
+        selectedItem={currentCounty}
         placeholder="County"
         autocompleteProps={{
-          // Used for the title in the autocomplete.
           title: "County",
         }}
         disabled={!currentState || !countyList}
