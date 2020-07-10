@@ -55,12 +55,14 @@ const StateInfo = ({ stateName, setErrors, errors }) => {
   return (
     <div className="state-info-container">
       {searchObject && (
-        <h3>{`State: ${
-          stateName.charAt(0).toUpperCase() + stateName.slice(1)
-        } (${abbrev})`}</h3>
+        <div className="title">
+          <h3>{`State: ${
+            stateName.charAt(0).toUpperCase() + stateName.slice(1)
+          } (${abbrev})`}</h3>
+        </div>
       )}
       {searchObject && (
-        <div style={{ textAlign: "left" }}>
+        <div className="info-box" style={{ marginBottom: "20px" }}>
           <p>Confirmed(total): {searchObject.Confirmed}</p>
           <p>New cases(24 hrs): {searchObject.new_confirmed}</p>
           <p>Deaths(total): {searchObject.Deaths}</p>

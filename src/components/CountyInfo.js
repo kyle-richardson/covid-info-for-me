@@ -90,12 +90,14 @@ const CountyInfo = () => {
         <Button type="submit">Search</Button>
       </form>
       {myCountyObject && (
-        <h3>{`County: ${
-          myCountyString.charAt(0).toUpperCase() + myCountyString.slice(1)
-        }`}</h3>
+        <div className="title">
+          <h3>{`County: ${
+            myCountyString.charAt(0).toUpperCase() + myCountyString.slice(1)
+          }`}</h3>
+        </div>
       )}
       {myCountyObject && (
-        <div style={{ textAlign: "left" }}>
+        <div className="info-box">
           <p>Confirmed(total): {myCountyObject[0].confirmed}</p>
           <p>
             New cases(24 hrs):{" "}
