@@ -4,7 +4,8 @@ import axios from "axios";
 import moment from "moment";
 import { stateAbbrev } from "../data/stateAbbrev";
 
-const StateInfo = ({ stateName, setErrors, errors }) => {
+const StateInfo = ({ currentState }) => {
+  const stateName = currentState && currentState.split(" (")[0];
   const [stateList, setStateList] = useState([]);
   const [searchDate, setSearchDate] = useState(
     moment().subtract(1, "days").format("YYYY-MM-DD")
@@ -25,14 +26,12 @@ const StateInfo = ({ stateName, setErrors, errors }) => {
         stateAbbr: abbrev,
       })
       .then((res) => {
-        console.log(res.data.message);
         setStateList(res.data.message);
-        setErrors({ ...errors, state: "" });
       })
       .catch((err) => {
-        setErrors({ ...errors, state: "State name not found." });
+        console.log(err);
       });
-  }, [stateName, abbrev]);
+  }, [currentState, stateName, abbrev]);
 
   useEffect(() => {
     if (searchDate && stateList.length > 0) {
