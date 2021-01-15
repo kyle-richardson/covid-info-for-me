@@ -22,16 +22,14 @@ const StateInfo = ({ currentState }) => {
 
   useEffect(() => {
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/state`, {
-        stateAbbr: abbrev,
-      })
+      .get(`${process.env.REACT_APP_API_BASE_URL}/states/:${stateName}?yesterday=true`)
       .then((res) => {
-        setStateList(res.data.message);
+        setStateList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [currentState, stateName, abbrev]);
+  }, [currentState, stateName]);
 
   useEffect(() => {
     if (searchDate && stateList.length > 0) {

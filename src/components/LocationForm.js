@@ -13,7 +13,7 @@ const LocationForm = ({
     (ele) => `${ele.name} (${ele.abbreviation})`
   );
   const countyListFormatted = countyList && [
-    ...new Set(countyList.map((county) => county.county_name)),
+    ...new Set(countyList.map((county) => county.county)),
   ];
   return (
     <>

@@ -19,9 +19,10 @@ function App() {
   useEffect(() => {
     setIsFetching(true);
     axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/county`)
+      .get(`${process.env.REACT_APP_API_BASE_URL}/jhucsse/counties`)
       .then((res) => {
-        const list = res.data.message;
+        console.log(res);
+        const list = res.data;
         setFullCountyList(list);
       })
       .catch((err) => {
@@ -36,7 +37,7 @@ function App() {
     if (currentState) {
       const stateName = currentState.split(" (")[0];
       const getCounties = fullCountyList.filter(
-        (ele) => ele.state_name.toLowerCase() === stateName.toLowerCase()
+        (ele) => ele.province.toLowerCase() === stateName.toLowerCase()
       );
       if (getCounties.length > 0) {
         setStateCountyList(getCounties);
@@ -50,8 +51,8 @@ function App() {
       const stateName = currentState.split(" (")[0];
       const filtered = fullCountyList.filter(
         (ele) =>
-          ele.county_name.toLowerCase() === currentCounty.toLowerCase() &&
-          ele.state_name.toLowerCase() === stateName.toLowerCase()
+          ele.county.toLowerCase() === currentCounty.toLowerCase() &&
+          ele.province.toLowerCase() === stateName.toLowerCase()
       )[0];
       setMyCountyObject(filtered);
     }
@@ -74,7 +75,7 @@ function App() {
             currentCounty={currentCounty}
           />
           <StateInfo currentState={currentState} />
-          <CountyInfo myCountyObject={myCountyObject} />
+          <CountyInfo myCountyObject={myCountyObject} state={currentState.split(" (")[0].toLowerCase()} />
         </>
       )}
     </div>
