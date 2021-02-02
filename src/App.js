@@ -73,8 +73,12 @@ function App() {
             setCounty={setCurrentCounty}
             currentCounty={currentCounty}
           />
-          <StateInfo currentState={currentState} />
-          <CountyInfo myCountyObject={myCountyObject} state={currentState.split(" (")[0].toLowerCase()} />
+          <div className="info-containers">
+            <StateInfo currentState={currentState} />
+            <CountyInfo myCountyObject={myCountyObject} state={currentState.split(" (")[0].toLowerCase()} />
+          </div>
+
+          
         </>
       )}
     </div>
