@@ -28,14 +28,14 @@ const CountyInfo = ({ myCountyObject, state }) => {
       )}
       {myCountyObject && historicalData && (
         <div className="info-box">
-          <p>Confirmed(total): {myCountyObject.stats.confirmed}</p>
+          <p>Confirmed (total): {myCountyObject.stats.confirmed}</p>
           <p>
-            New cases(24 hrs):{" "}
+            New cases (24 hrs):{" "}
             {myCountyObject.stats.confirmed - historicalData[0].cases}
           </p>
-          <p>Deaths(total): {myCountyObject.stats.deaths}</p>
+          <p>Deaths (total): {myCountyObject.stats.deaths}</p>
           <p>
-            New deaths(24 hrs):{" "}
+            New deaths (24 hrs):{" "}
             {myCountyObject.stats.deaths - historicalData[0].deaths}
           </p> 
           <p>Fatality rate: {Math.round((Number(myCountyObject.stats.deaths) / Number(myCountyObject.stats.confirmed)) * 1000) / 1000 }</p>

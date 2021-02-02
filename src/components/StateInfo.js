@@ -42,11 +42,11 @@ const StateInfo = ({ currentState }) => {
       )}
       {currentState && (
         <div className="info-box" style={{ marginBottom: "20px" }}>
-          <p>Confirmed(total): {searchObject.cases}</p>
+          <p>Confirmed (total): {searchObject.cases}</p>
           <p>Active: {searchObject.active}</p>
-          <p>New cases(24 hrs): {searchObject.todayCases}</p>
-          <p>Deaths(total): {searchObject.deaths}</p>
-          <p>New deaths(24 hrs): {searchObject.todayDeaths}</p>
+          <p>New cases (24 hrs): {searchObject.todayCases}</p>
+          <p>Deaths (total): {searchObject.deaths}</p>
+          <p>New deaths (24 hrs): {searchObject.todayDeaths}</p>
           <p>Last updated: {moment(searchObject.updated).format("MMM DD, YYYY HH:mm")}</p>
         </div>
       )}
