@@ -1,48 +1,31 @@
+html {
+	background-image: url('./assets/covid_pic.jpg');
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: 175px 175px;
+	height: 100%;
+	height: 100vh;
+}
+
 .App {
 	text-align: center;
-}
-
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
-}
-
-.App-header {
-	background-color: #282c34;
 	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }
 
 .info-containers {
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
+	justify-content: center;
 	width: 80%;
 	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.info-containers > * {
+	margin: 20px;
+}
+
+.county-info-container {
+	padding-bottom: 9px;
 }
 
 .county-info-container,
@@ -59,8 +42,10 @@
 	background: rgb(112, 142, 207);
 	width: 100%;
 	height: 100%;
+	height: 60px;
 	padding: 0 10px;
-	border: 1px solid rgb(112, 142, 207);
+	/* border: 1px solid rgb(112, 142, 207); */
+	border: 1px solid black;
 }
 
 .info-box {
@@ -76,4 +61,27 @@
 	.info-containers {
 		flex-direction: column;
 	}
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, -10%);
+}
+
+.icons > * {
+	padding: 0 5px;
+	vertical-align: middle;
+	font-size: 1.3rem;
+	color: black;
+}
+.icons > *:active,
+.icons > *:hover,
+.icons > *:visited {
+	color: black;
+}
+
+.footer-name {
+	display: flex;
 }

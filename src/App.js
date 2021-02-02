@@ -5,6 +5,7 @@ import CountyInfo from "./components/CountyInfo";
 import LocationForm from "./components/LocationForm";
 import StateInfo from "./components/StateInfo";
 import { Spinner } from "evergreen-ui";
+import Footer from "./components/Footer"
 
 function App() {
   const [currentState, setCurrentState] = useState("");
@@ -63,7 +64,8 @@ function App() {
         <Spinner marginX="auto" marginY={"20%"} />
       ) : (
         <>
-          <h1>COVID info for me</h1>
+          <h1 style={{marginBottom: "0"}}>COVID-19 info for me</h1>
+          <p>Get info for your county</p>
           {stateErrors && <p style={{ color: "red" }}>{stateErrors}</p>}
           {countyErrors && <p style={{ color: "red" }}>{countyErrors}</p>}
           <LocationForm
@@ -77,8 +79,7 @@ function App() {
             <StateInfo currentState={currentState} />
             <CountyInfo myCountyObject={myCountyObject} state={currentState.split(" (")[0].toLowerCase()} />
           </div>
-
-          
+          <Footer/>
         </>
       )}
     </div>
