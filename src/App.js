@@ -14,14 +14,13 @@ function App() {
   const [countyErrors, setCountyErrors] = useState();
   const [stateErrors, setStateErrors] = useState();
   const [myCountyObject, setMyCountyObject] = useState("");
-  const [isFetching, setIsFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     setIsFetching(true);
     axios
       .get(`${process.env.REACT_APP_API_BASE_URL}/jhucsse/counties`)
       .then((res) => {
-        console.log(res);
         const list = res.data;
         setFullCountyList(list);
       })

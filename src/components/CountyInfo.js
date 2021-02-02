@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios"
-import { stateAbbrev } from "../data/stateAbbrev";
+import moment from "moment"
 
 const CountyInfo = ({ myCountyObject, state }) => {
   const [historicalData, setHistData] = useState()
   useEffect(()=> {
     if (myCountyObject){
       axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/nyt/counties?county=${myCountyObject.county.toLowerCase()}`)
+      .get(`${process.env.REACT_APP_API_BASE_URL}/nyt/counties/${myCountyObject.county.toLowerCase()}?lastdays=1`)
       .then((res) => {
         setHistData(res.data)
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -19,7 +18,7 @@ const CountyInfo = ({ myCountyObject, state }) => {
   }, [myCountyObject, state])
   return (
     <div className="county-info-container">
-      {myCountyObject && (
+      {myCountyObject && historicalData &&  (
         <div className="title">
           <h3>{`County: ${
             myCountyObject.county.charAt(0).toUpperCase() +
@@ -27,24 +26,20 @@ const CountyInfo = ({ myCountyObject, state }) => {
           }`}</h3>
         </div>
       )}
-      {myCountyObject && (
+      {myCountyObject && historicalData && (
         <div className="info-box">
           <p>Confirmed(total): {myCountyObject.stats.confirmed}</p>
-          {/* <p>
+          <p>
             New cases(24 hrs):{" "}
-            {myCountyObject.new === 0
-              ? "0 (or not recorded)"
-              : myCountyObject.new}
-          </p> */}
+            {myCountyObject.stats.confirmed - historicalData[0].cases}
+          </p>
           <p>Deaths(total): {myCountyObject.stats.deaths}</p>
-          {/* <p>
+          <p>
             New deaths(24 hrs):{" "}
-            {myCountyObject.new_death === 0
-              ? "0 (or not recorded)"
-              : myCountyObject.new_death}
-          </p> */}
-          {/* <p>Fatality rate: {myCountyObject.fatality_rate}</p> */}
-          <p>Last Updated: {myCountyObject.updatedAt}</p>
+            {myCountyObject.stats.deaths - historicalData[0].deaths}
+          </p> 
+          <p>Fatality rate: {Math.round((Number(myCountyObject.stats.deaths) / Number(myCountyObject.stats.confirmed)) * 1000) / 1000 }</p>
+          <p>Last Updated: {moment(myCountyObject.updatedAt).format("MMM DD, YYYY HH:mm")}</p>
         </div>
       )}
     </div>
