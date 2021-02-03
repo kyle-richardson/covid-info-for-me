@@ -30,7 +30,7 @@ html {
 
 .info-containers > * {
 	margin: 20px;
-	flex-grow: 1;
+	/* flex-grow: 1; */
 }
 
 .county-info-container {
@@ -79,7 +79,6 @@ html {
 	transform: translate(-50%, -10%); */
 	flex-basis: 100px;
 }
-
 .icons > * {
 	padding: 0 5px;
 	vertical-align: middle;
