@@ -28,18 +28,18 @@ const CountyInfo = ({ myCountyObject, state }) => {
       )}
       {myCountyObject && historicalData && (
         <div className="info-box">
-          <p>Confirmed (total): {myCountyObject.stats.confirmed}</p>
+          <p>Confirmed (total): <span>{myCountyObject.stats.confirmed}</span></p>
           <p>
             New cases (24 hrs):{" "}
-            {myCountyObject.stats.confirmed - historicalData[0].cases}
+            <span>{myCountyObject.stats.confirmed - historicalData[0].cases}</span>
           </p>
-          <p>Deaths (total): {myCountyObject.stats.deaths}</p>
+          <p>Deaths (total): <span>{myCountyObject.stats.deaths}</span></p>
           <p>
             New deaths (24 hrs):{" "}
-            {myCountyObject.stats.deaths - historicalData[0].deaths}
+            <span>{myCountyObject.stats.deaths - historicalData[0].deaths}</span>
           </p> 
-          <p>Fatality rate: {Math.round((Number(myCountyObject.stats.deaths) / Number(myCountyObject.stats.confirmed)) * 1000) / 1000 }</p>
-          <p>Last Updated: {moment(myCountyObject.updatedAt).format("MMM DD, YYYY HH:mm")}</p>
+          <p>Fatality rate: <span>{Math.round((Number(myCountyObject.stats.deaths) / Number(myCountyObject.stats.confirmed)) * 1000) / 1000 }</span></p>
+          <p>Last Updated: <span>{moment(myCountyObject.updatedAt).format("MMM DD, YYYY HH:mm")}</span></p>
         </div>
       )}
     </div>

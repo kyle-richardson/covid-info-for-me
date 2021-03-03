@@ -35,7 +35,7 @@ const LocationForm = ({
         autocompleteProps={{
           title: "County",
         }}
-        disabled={!currentState || !countyList}
+        disabled={!(currentState && countyList)}
       />
     </>
   );
