@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     setIsFetching(true);
     axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/jhucsse/counties`)
+      .get(`${process.env.REACT_APP_API_BASE_URL}/nyt/counties`)
       .then((res) => {
         const list = res.data;
         setFullCountyList(list);
@@ -37,7 +37,7 @@ function App() {
     if (currentState) {
       const stateName = currentState.split(" (")[0];
       const getCounties = fullCountyList.filter(
-        (ele) => ele.province.toLowerCase() === stateName.toLowerCase()
+        (ele) => ele.state.toLowerCase() === stateName.toLowerCase()
       );
       if (getCounties.length > 0) {
         setStateCountyList(getCounties);
@@ -52,7 +52,7 @@ function App() {
       const filtered = fullCountyList.filter(
         (ele) =>
           ele.county.toLowerCase() === currentCounty.toLowerCase() &&
-          ele.province.toLowerCase() === stateName.toLowerCase()
+          ele.state.toLowerCase() === stateName.toLowerCase()
       )[0];
       setMyCountyObject(filtered);
     }
